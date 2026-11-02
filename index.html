@@ -1,0 +1,72 @@
+<!--  | Welcome to my abode,   |   -->
+<!--  | Feel free to take      |   -->
+<!--  | whatever You'd like!!! |   -->
+<!--  \________  ______________/   -->
+<!--           |/                  -->
+<!--       |\___/,|     (`\        -->
+<!--     _.|o  o  |_     ) )       -->
+<!----(((---(((---------------------->
+<!DOCTYPE html>
+<html lang="en" title="Cheese's Desktop">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>test3</title>
+
+    <link rel="stylesheet" href="styles/main.css" fetchpriority="high">
+    <link rel="stylesheet" href="styles/window/window-content.css" fetchpriority="high">
+    
+    <script defer type="text/javascript" src="scripts/desk-pc.js" fetchpriority="high"></script>
+    <script type="text/javascript" src="scripts/jquery/jquery.js"></script>
+
+    <script defer type="text/javascript" src="scripts/desktop.js" fetchpriority="low"></script>
+    <script defer type="text/javascript" src="scripts/window/window.js" fetchpriority="low"></script>
+    <script defer type="text/javascript" src="scripts/window/window-content.js" fetchpriority="low"></script>
+</head>
+
+<body onload="
+        initDesktopFeatures(); 
+        spawnWindow('spout.html');
+        spawnWindow('welcome.html');
+        spawnWindow('projects.html');
+">
+<div id="top-div">
+    <div class="body-container">
+        <div id="screen-parent">
+            <div id="screen">
+                <div id="desktop">
+                    <!-- Container for wallpaper and background props -->
+                    <div id="wallpaper-container">
+                        <img id="wallpaper" src="resources/images/OS/Wallpaper/desktop-bg-dithered.webp" alt="">
+                    </div>
+                </div>
+                <div id="desktop-apps">
+                    <!-- Container for files and apps you can open from the desktop -->
+                </div>
+                <div id="taskbar"><div id="taskbar-top-border"></div>
+                    <!-- Container for the contents of the taskbar -->
+                    <div id="taskbar-clock"><p id="taskbar-clock-p" class="text-smaller">00:00</p></div>
+                </div>
+
+                <div id="windows-container" class="scroll"></div>
+
+            </div> <!-- screen -->
+        </div> <!-- screen-parent -->
+
+        <div class="div-site-backgrounds-parent">
+            <img src="resources/images/Desk/90s-desk-pc-off.webp" alt="" id="img-90s-desk-pc-off">
+            <img src="resources/images/Desk/90s-desk-pc-turning-on-0.webp" alt="" id="img-90s-desk-pc-turning-on-0">
+            <img src="resources/images/Desk/90s-desk-pc-turning-on-1.webp" alt="" id="img-90s-desk-pc-turning-on-1">
+            <img src="resources/images/Desk/90s-desk-pc-turning-on-2.webp" alt="" id="img-90s-desk-pc-turning-on-2">
+            <img src="resources/images/Desk/90s-desk-pc-on.webp" alt="" id="img-90s-desk-pc-on">
+            <button id="desk-pc-on-button" title="Power Button" onclick="pcOnButton()"></button>
+        </div>
+    </div> <!-- body-container -->
+</div> <!-- top-div -->
+
+<script> <!-- Desktop Layout Media Query -->
+
+</script>
+
+</body>
+</html>

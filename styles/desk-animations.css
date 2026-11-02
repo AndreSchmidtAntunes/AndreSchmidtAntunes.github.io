@@ -1,0 +1,115 @@
+@keyframes desk-pc-turn-on {
+    0% {
+        opacity: var(--off-opacity);
+        pointer-events: all;
+    }
+
+    10% {
+        opacity: var(--turning-on-1-opacity);
+    }
+
+    50% {
+        opacity: var(--turning-on-2-opacity);
+    }
+
+    70% {
+        opacity: var(--turning-on-3-opacity);
+    }
+
+    90% {
+        opacity: var(--turning-on-3-opacity);
+    }
+
+    100% {
+        opacity: var(--on-opacity);
+        pointer-events: none;
+    }
+}
+
+@keyframes desk-pc-turn-off {
+    0% {
+        opacity: var(--on-opacity);
+        pointer-events: none;
+    }
+
+    10% {
+        opacity: var(--turning-off-opacity);
+    }
+
+    90% {
+        opacity: var(--turning-off-opacity);
+    }
+
+    100% {
+        opacity: var(--off-opacity);
+        pointer-events: all;
+    }
+}
+
+#img-90s-desk-pc-off {
+    content-visibility: auto;
+    --on-opacity: 0;
+    --turning-off-opacity: 0;
+    --turning-on-1-opacity: 0;
+    --turning-on-2-opacity: 0;
+    --turning-on-3-opacity: 0;
+    --off-opacity: 1;
+}
+
+#img-90s-desk-pc-turning-on-0 {
+    content-visibility: auto;
+    --on-opacity: 0;
+    --turning-off-opacity: 1;
+    --turning-on-1-opacity: 1;
+    --turning-on-2-opacity: 0;
+    --turning-on-3-opacity: 0;
+    --off-opacity: 1;
+}
+
+#img-90s-desk-pc-turning-on-1 {
+    content-visibility: auto;
+    --on-opacity: 0;
+    --turning-off-opacity: 0;
+    --turning-on-1-opacity: 1;
+    --turning-on-2-opacity: 1;
+    --turning-on-3-opacity: 0;
+    --off-opacity: 0;
+}
+
+#img-90s-desk-pc-turning-on-2 {
+    content-visibility: auto;
+    --on-opacity: 0;
+    --turning-off-opacity: 0;
+    --turning-on-1-opacity: 1;
+    --turning-on-2-opacity: 1;
+    --turning-on-3-opacity: 1;
+    --off-opacity: 1;
+}
+
+#img-90s-desk-pc-on {
+    content-visibility: auto;
+    --on-opacity: 1;
+    --turning-off-opacity: 1;
+    --turning-on-1-opacity: 1;
+    --turning-on-2-opacity: 1;
+    --turning-on-3-opacity: 1;
+    --off-opacity: 1;
+}
+
+.desk-is-running-on-animation {
+    animation: desk-pc-turn-on 4s linear forwards;
+}
+
+.desk-is-running-off-animation {
+    animation: desk-pc-turn-off 2s linear forwards;
+}
+
+.desk-init-on {
+    opacity: var(--on-opacity);
+    pointer-events: none;
+}
+
+.desk-init-off {
+    opacity: var(--off-opacity);
+    pointer-events: all;
+}

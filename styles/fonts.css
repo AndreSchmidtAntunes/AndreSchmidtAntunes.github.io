@@ -1,0 +1,71 @@
+@font-face {
+    font-family: yoster;
+    src: url(../resources/fonts/yoster.ttf);
+}
+
+@font-face {
+    font-family: dogicaPixel;
+    font-weight: normal;
+    src: url(../resources/fonts/DogicaPixel/dogicapixel.ttf)
+}
+
+@font-face {
+    font-family: dogicaPixel;
+    font-weight: bold;
+    src: url(../resources/fonts/DogicaPixel/dogicapixelbold.ttf)
+}
+
+
+/* Caskaydia Cove */
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: normal;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-Regular.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: bold;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-Bold.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: 300;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-Light.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: 200;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-ExtraLight.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: normal;
+    font-style: italic;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-Italic.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: bold;
+    font-style: italic;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-BoldItalic.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: 300;
+    font-style: italic;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-LightItalic.ttf)
+}
+
+@font-face {
+    font-family: caskaydiaCove;
+    font-weight: 200;
+    font-style: italic;
+    src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-ExtraLightItalic.ttf)
+}

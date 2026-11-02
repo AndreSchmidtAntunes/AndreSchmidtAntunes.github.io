@@ -1,0 +1,263 @@
+@import url('fonts.css');
+@import url('window/window-logic.css');
+@import url('window/window-style.css');
+@import url('desk-animations.css');
+
+:root {
+	--desktop-aspect-ratio: 1.1904761905;
+	--min-desktop-device-width: 640px;
+	color-scheme: dark light;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	image-rendering: pixelated;
+}
+
+html, body {
+	overflow: hidden;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #000000;
+}
+
+.scroll {
+	overflow-y: scroll !important;
+	> * {
+		touch-action: pan-y;
+	}
+}
+
+#top-div {
+	--safe-area-padding: 0;
+	
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 100%;
+	min-height: 100dvh;
+	box-sizing: border-box;
+	padding: var(--safe-area-padding);
+	
+	> .body-container {
+		position: relative;
+		width: 100%;
+		height: 91dvh;
+		flex: 0 0 auto;
+		box-sizing: border-box;
+		background-color: white;
+		container-type: size;
+		display: flex;
+		align-items: center;
+		overflow: visible;
+		
+		> #screen-parent {
+			position: absolute;
+			inset: 0;
+			
+			> #screen {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				container-type: size;
+				background-color: rgb(72, 255, 0);
+				
+				--font-mult: 3cqh;
+				--font-base: 0px;
+				font-size: var(--font-mult);
+				
+				* {
+					--taskbar-height: calc(6cqh + var(--font-base));
+				}
+				
+				.text-smaller   { font-size: calc(var(--font-mult) * 0.68 + var(--font-base)); }
+				.text-small     { font-size: calc(var(--font-mult) * 0.74 + var(--font-base)); }
+				.text-normal    { font-size: calc(var(--font-mult) + var(--font-base)); }
+				.text-large     { font-size: calc(var(--font-mult) * 1.6 + var(--font-base)); }
+				.text-xl        { font-size: calc(var(--font-mult) * 2.3 + var(--font-base)); }
+				.text-xxl       { font-size: calc(var(--font-mult) * 3 + var(--font-base)); }
+				.text-xxxl      { font-size: calc(var(--font-mult) * 3.6 + var(--font-base)); }
+				.text-xxxxl     { font-size: calc(var(--font-mult) * 4.3 + var(--font-base)); }
+				.text-xxxxxl    { font-size: calc(var(--font-mult) * 5 + var(--font-base)); }
+			}
+		}
+	}
+}
+
+/* Wallpaper: fills the height, centred horizontally */
+
+#desktop {
+	position: absolute;
+	inset: 0;
+}
+
+#desktop > #wallpaper-container {
+	position: absolute;
+	width: 100dvw;
+	user-select: none;
+	
+	> #wallpaper {
+		position: relative;
+		width: auto;
+		height: 100cqh;
+		left: 50%;
+		translate: -50%;
+	}
+}
+
+/* Windows stack vertically (the .window rules live in window-logic.css) */
+
+#taskbar {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 100cqw;
+	max-width: 100dvw;
+	height: var(--taskbar-height);
+	transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	
+	display: flex;
+	flex-direction: column;
+	
+	background-color: rgb(20 20 41);
+	
+	> * {
+		height: 100%;
+		max-height: inherit !important;
+		padding-bottom: 1.2cqw !important;
+		display: block;
+	}
+	
+	#taskbar-top-border {
+		z-index: 1;
+		position: absolute;
+		width: 100%;
+		padding: unset !important;
+		
+		height: 1px !important;
+		background-color: rgb(167 154 200 / 0.34);
+		mix-blend-mode: plus-lighter;
+	}
+	
+	> #taskbar-clock {
+		align-self: flex-end;
+		display: flex;
+		align-items: center;
+		height: 100%;
+		margin: 0;
+		padding-inline: 2cqw;
+		background-color: #699d9f;
+		
+		> #taskbar-clock-p {
+			font-family: dogicapixel, monospace;
+			color: rgb(20 20 41);
+			font-weight: bold;
+		}
+	}
+}
+
+/* ---- Site background / desk images ---- */
+.div-site-backgrounds-parent {
+	pointer-events: none;
+	position: absolute;
+	width: 100dvw;
+	height: 100dvh;
+	overflow: visible;
+	
+	img {
+		position: absolute;
+		top: 50%;
+		right: 50%;
+		width: 100dvw;
+		height: 877.6393321251cqh;
+		object-fit: cover;
+		transform: translate(50%, -50%);
+		-ms-transform: translate(50%, -50%);
+		pointer-events: none;
+		image-rendering: smooth;
+	}
+	
+	#desk-pc-on-button {
+		z-index: 1000;
+		position: absolute;
+		pointer-events: auto;
+		left: 50%;
+		top: calc(50% + 57cqh);
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		
+		width: 12.5cqh;
+		height: 12.5cqh;
+		user-select: none;
+		background-color: transparent;
+		cursor: pointer;
+		opacity: 0;
+	}
+}
+
+#img-90s-desk-pc-off { z-index: 999; }
+#img-90s-desk-pc-turning-on-0 { z-index: 998; }
+#img-90s-desk-pc-turning-on-1 { z-index: 997; }
+#img-90s-desk-pc-turning-on-2 { z-index: 996; }
+#img-90s-desk-pc-on { z-index: 995; }
+
+
+/* ---- Desktop Mode ---- */
+
+.desktop {
+	
+	#top-div {
+		--safe-area-padding: 10cqh;
+		height: 100dvh;
+		
+		> .body-container {
+			width: 100%;
+			height: auto;
+			max-width: max(
+					0px,
+					(100dvh - (var(--safe-area-padding) * 2)) * var(--desktop-aspect-ratio)
+			);
+			aspect-ratio: var(--desktop-aspect-ratio);
+			background-color: #ffffff;
+			justify-content: center;
+			align-items: center;
+			
+			> #screen-parent {
+				inset: auto;
+				
+				> #screen {
+					width: auto;
+					height: 100cqh;
+					aspect-ratio: var(--desktop-aspect-ratio);
+				}
+			}
+		}
+	}
+	
+	/* Wallpaper fills the screen instead of being height-fitted */
+	#desktop {
+		position: static;
+		inset: auto;
+		
+		> #wallpaper-container > #wallpaper {
+			width: 100cqw;
+			height: 100cqh;
+			left: auto;
+			translate: none;
+		}
+	}
+	
+	/* Taskbar is no longer centred with a transform */
+	#screen > #taskbar {
+		left: unset;
+		transform: unset;
+		-ms-transform: unset;
+	}
+}

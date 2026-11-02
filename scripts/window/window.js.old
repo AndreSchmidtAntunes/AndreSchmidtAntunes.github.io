@@ -1,0 +1,317 @@
+function calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday;
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+const birthday = new Date("2007-07-05T00:00:00")
+var age = calculateAge(birthday)
+$(".ageText").text(age.toString())
+
+touchingInnerBody = false
+grabbing = false
+
+
+// System to determine which windows are above which
+
+let windowOrderList = [];
+const zIndexMinimum = 10
+
+function PutWindowOnTop(windowEl, overlayEl = null) {
+
+    const oldWindowOrderIndex = windowOrderList.indexOf(windowEl);
+    
+    if (oldWindowOrderIndex !== -1) {
+        windowOrderList.splice(oldWindowOrderIndex, 1);
+    }
+    windowOrderList.push(windowEl);
+
+    for (var i = 0; i < windowOrderList.length; i++) {
+        $(windowOrderList[i]).css("z-index", i + zIndexMinimum);
+    }
+
+    if (overlayEl == null) 
+        var windowOverlay = windowEl.querySelector(".overlay");
+    else 
+        var windowOverlay = overlayEl;
+    
+    // Remove 'focused' class from all other windowElements
+    document.querySelectorAll('.window.focused').forEach(win => {
+        win.classList.remove('focused');
+    });
+
+    // Add 'focused' class to the selected window
+    windowEl.classList.add('focused');
+}
+
+
+// Custom Scrollbars Script by kiophen 2022
+// Put this at the bottom of your page to make the scrollbars functional
+
+function setThumbsHeight(bar) { // make the scrollbar thumbs the right height (firefox only) and add event listeners
+    var contentBox = bar.previousElementSibling;
+
+    if (contentBox.scrollHeight > contentBox.clientHeight) {
+        bar.style.display = "block";
+        var hite = bar.previousElementSibling.clientHeight / bar.previousElementSibling.scrollHeight * 100 + "%";
+        bar.style.setProperty("--scrollthumb-height", hite); 
+    } else {
+        bar.style.display = "none";
+    }
+}
+
+function scrollBarUpdate(a) {
+    a.previousElementSibling.scrollTo(0,(1-a.value/100)*(a.previousElementSibling.scrollHeight-a.previousElementSibling.clientHeight));
+}
+
+function boxContentUpdate(a) {
+    a.nextElementSibling.value=(1-a.scrollTop/(a.scrollHeight-a.clientHeight))*100;
+}
+
+function OpenWindow(idOrElement) {
+    var windowEl = document.getElementById(idOrElement+"Window");
+    
+    var windowContainer = document.querySelector(
+        `div[data-window-id="${idOrElement}"]`
+    );
+
+    var file = 'Html/Windows/' + idOrElement + '.html';
+
+    if (windowEl && windowEl.getAttribute("isOpen") == "true") {
+        PutWindowOnTop(windowEl);
+        windowEl.style.animation = "alertToWindow 0.31s 1";
+        setTimeout(function(){
+            windowEl.style.animation = "none";
+        }, 300);
+    }
+    else fetch(file)
+        .then(response => response.text())
+        .then(html => {
+            windowContainer.innerHTML = html;
+            windowEl = windowContainer.querySelector(".window");
+
+            windowEl.addEventListener('mousedown',function(){
+                PutWindowOnTop(windowEl); 
+            });
+
+            const overlayEl = windowEl.querySelector(".overlay");
+            if (overlayEl != null) {
+                overlayEl.addEventListener("mousedown", function () {
+                    PutWindowOnTop(windowEl.closest(".window"), overlayEl); 
+                });
+            };
+
+            var styles = getComputedStyle(windowEl);
+            var display = styles.getPropertyValue('display');
+
+            if (display == "none") {
+                windowEl.setAttribute("isOpen", "false");
+                console.log("none")
+            }
+            else if (display == "block") {
+                windowEl.setAttribute("isOpen", "true");
+            }
+            else {
+                console.log("oh lordy")
+            }
+            windowEl.setAttribute("isFullscreen", "false");
+
+            
+
+            var bar = windowEl.querySelector(".scrollBar");
+            if (bar != null) {
+                bar.value = 100;
+                bar.oninput = function(){scrollBarUpdate(bar)};
+            } 
+            
+            const box = windowEl.querySelector(".boxContent");
+            if (box != null)
+                box.onscroll = function(){boxContentUpdate(box)};
+
+
+            $(windowEl).resizable({
+                minWidth: 110,
+                minHeight: 40,
+                containment: "#screen",
+                stop: function (event, ui) {
+                    setThumbsHeight(this.querySelector(".scrollBar"));
+                },
+            });
+
+            $(windowEl).draggable({
+                containment: "#screen",
+                appendTo: "body",
+                cancel: ".inner-body",
+                cursor: "grabbing",
+                start: function (event, ui) {
+
+                    $(this).css("cursor", "grabbing");
+                    grabbing = true;
+                    
+                },
+
+                stop: function (event, ui) {
+                    $(this).css("cursor", "grab");
+                    grabbing = false;
+                    
+                },
+                
+
+            });
+
+            $(windowEl.querySelector(".inner-body")).hover(
+                function() {
+                    if (grabbing == false) {
+                        touchingInnerBody = true
+                        if (touchingInnerBody == false) {
+                            $(this).css("cursor", "grab");
+                        }
+                        else {
+                            $(this).css("cursor", "auto");
+                        }
+                    }
+
+                    $( ".selector" ).draggable({
+                        disabled: false
+                    });
+                    
+                }, 
+                function() {
+                    if (grabbing == false) {
+                        touchingInnerBody = false
+                    }
+                    $( ".selector" ).draggable({
+                        disabled: true
+                    });
+                    
+                }
+            )
+
+            $(windowEl).hover(
+                function() {
+                    if (touchingInnerBody == false) {
+                        if (grabbing == true) {
+                            $(this).css("cursor", "grabbing");
+                        }
+                        else {
+                            $(this).css("cursor", "grab");
+                        }
+                        
+                    }
+                    else {
+                        $(this).css("cursor", "grab");
+                    }
+
+
+                }, 
+                function() {
+                    $(this).css("cursor", "auto");
+                }
+            )
+            $(windowEl).mousedown(function()
+                {
+
+                    if (touchingInnerBody) {
+                        
+                        $(this).css("cursor", "auto");
+                    }
+                    else {
+                        $(this).css("cursor", "grabbing");
+                    }
+                }
+            )
+
+            $(windowEl).mouseup(function()
+                {
+                    if (touchingInnerBody) {
+                        
+                        $(this).css("cursor", "auto");
+                    }
+                    else {
+                        $(this).css("cursor", "grab");
+                    }
+                }
+            )
+
+            PutWindowOnTop(windowEl);
+            
+            windowEl.setAttribute("isOpen", "true");
+            windowEl.style.display = "block";
+            windowEl.style.animation = "openWindow 0.131s 1" ;
+            setTimeout(function(){
+                windowEl.style.animation = "none";
+            }, 130);
+            
+            const scrollBars = windowEl.querySelectorAll(".scrollBar");
+            scrollBars.forEach(scrollBar => {
+                setTimeout(() => setThumbsHeight(scrollBar), 300);
+            });
+        });
+}
+
+// Maximize window // -- Toggles between windowed and maximized
+
+function MaximizeWindow(idOrElement, animate = true) {
+
+    if (typeof idOrElement == "string")
+    var windowEl = document.getElementById(idOrElement);
+    else var windowEl = idOrElement.closest(".window")
+
+    var resizeIcon = windowEl.querySelector(".resizeWindowIcon")
+
+    if (windowEl.getAttribute("isFullscreen") != "true") {
+        windowEl.setAttribute("isFullscreen", "true");
+        if (animate)
+        windowEl.style.animation = "fullScreenStart 0.11s forwards";
+        windowEl.querySelector("#fullscreenBtn").querySelector("button").innerHTML = "2";
+        taskbar.style.display = "none"
+        resizeIcon.style.display = "none"
+        setTimeout(function(){
+            windowEl.style.animation = "fullScreen 1s infinite";
+        }, 150);
+    }
+    else {
+        windowEl.setAttribute("isFullscreen", "false");
+        windowEl.classList.add("ui-widget-content");
+        if (animate)
+        windowEl.style.animation = "fullScreenEnd 0.11s forwards";
+        windowEl.querySelector("#fullscreenBtn").querySelector("button").innerHTML = "1";
+        taskbar.style.display = "block"
+        resizeIcon.style.display = "block"
+        setTimeout(function(){
+            windowEl.style.animation = "none";
+        }, 150);
+    }
+
+    PutWindowOnTop(windowEl)
+}
+
+// Close window //
+
+function CloseWindow(idOrElement) {
+    if (typeof idOrElement == "string")
+    var windowEl = document.getElementById(idOrElement);
+    else
+    var windowEl = idOrElement.closest(".window");
+
+    if (windowEl.getAttribute("isOpen") != "false") {
+        windowEl.setAttribute("isOpen", "false");
+        windowEl.style.animation = "closeWindow 0.13s forwards";
+
+        if (windowEl.getAttribute("isFullscreen") != "false") {
+            taskbar.style.display = "block";
+            MaximizeWindow(windowEl, false);
+        }
+        setTimeout(function(){
+            windowEl.remove();
+        }, 130);
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Initial selected window
+    var selectedWindowID = "welcomeWindow";
+    var selectedWindow = document.getElementById(selectedWindowID);
+    if (selectedWindow) PutWindowOnTop(selectedWindow);
+});

@@ -1,0 +1,144 @@
+@import url('content/video-project-heading.css');
+
+.window-content {
+    font-family: 'caskaydiaCove', monospace;
+    background-color: transparent;
+    color: var(--light-blue);
+    container-type: size;
+    
+    border: var(--border-colour) solid var(--border-width);
+    
+    overflow-y: auto !important;
+    -ms-overflow-y: auto !important;
+    
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg) var(--border-colour);
+}
+
+.window-content :is(h1, h2, h3, h4, h5, h6, ul, li, span, p, b, li, ul, ol, dl, dt, dd) {
+    user-select: text;
+    
+    &::selection {
+        background-color: var(--orange);
+        color: var(--border-colour);
+    }
+}
+    
+.window-content :is(h1, h2, h3, h4, h5, h6) {
+    text-transform: uppercase;
+    margin-top: 0.5em;
+    font-weight: bold;
+}
+
+.window-content :is(h1, h3)         { color: var(--orange);     }
+.window-content :is(h2, h4, h5, h6) { color: var(--light-blue); }
+
+.window-content h1 { font-size: 3.5em;   }
+.window-content h2 { font-size: 2.125em; }
+.window-content h3 { font-size: 1.75em;  }
+.window-content h4 { font-size: 1.5em;   }
+.window-content h5 { font-size: 1.25em;  }
+.window-content h6 { font-size: 1em;     }
+
+.window-content ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.window-content li {
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+.window-content li::before {
+    content: '★';
+    color: #ca88a4;
+    text-shadow: #0f1c2e 0.35cqh 0.35cqh 0;
+    
+    padding-right: 0.5em;
+}
+
+.window-content p {
+    padding: 1em;
+    max-width: max(80%, 30em);
+    align-self: center;
+    text-align: left;
+}
+
+.window-content img {
+    image-rendering: auto;
+    align-self: start;
+    width: 100%;
+    border-radius: unset;
+    
+    &.small, &.medium, &.large {
+        box-shadow: 0 1cqh 6cqh 0 rgb(0 0 0 / 0.25);
+    }
+}
+
+.window-content::-webkit-scrollbar {
+    width: 14px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background: var(--bg);
+    border-radius: 14px;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+    filter: brightness(1.2);
+}
+
+.window-content::-webkit-scrollbar-button {
+    display: block;
+    height: 14px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 14px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.window-content::-webkit-scrollbar-button:vertical:decrement:start {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'10\' height=\'10\' viewBox=\'0 0 10 10\'%3E%3Cpath d=\'M1 7 L5 3 L9 7 Z\' fill=\'%23bfc3d9\'/%3E%3C/svg%3E');
+}
+
+.window-content::-webkit-scrollbar-button:vertical:increment:end {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'10\' height=\'10\' viewBox=\'0 0 10 10\'%3E%3Cpath d=\'M1 3 L9 3 L5 7 Z\' fill=\'%23bfc3d9\'/%3E%3C/svg%3E');
+}
+
+.window-content::-webkit-scrollbar-button:hover {
+    filter: brightness(1.2);
+}
+
+.window-content .emoji {
+	vertical-align: middle;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+    overflow: visible;
+}
+
+.window-content .place-left {
+	position: absolute;
+	left: 0;
+}
+
+.window-content .place-right {
+	position: absolute;
+	right: 0;
+}
+
+.desktop .window-content img {
+    border-radius: 1em;
+    
+    &.small  { width: 40%; }
+    &.medium { width: 55%; }
+    &.large  { width: 80%; }
+}

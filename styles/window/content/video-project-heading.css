@@ -1,0 +1,33 @@
+:root {
+    --v: min(56.25cqw, 78cqh);      /* full video height */
+    --stage: calc(var(--v) * .74);  /* visible height when collapsed */
+    --fade: calc(var(--v) * .5);    /* div top to the collapsed video's bottom edge */
+    --gap: calc(var(--fade) * -1);
+}
+.window-content.preview-maximized { --stage: var(--v); --gap: 2cqh; }
+
+
+.preview-video-container { position: relative; height: var(--stage); overflow: hidden; z-index: -1; }
+.preview-video-container::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: linear-gradient(transparent, var(--bg));
+}
+.window-content.preview-maximized .preview-video-container::before { opacity: 0; }
+video {
+    display: block; object-fit: cover; width: 100%; height: var(--v);
+    translate: 0 calc((var(--stage) - var(--v)) * .5);
+}
+.text-content {
+    position: relative; box-sizing: border-box; display: flex; flex-direction: column; justify-content: end;
+    margin-top: var(--gap); min-height: var(--fade); overflow: visible;
+    background: linear-gradient(transparent, var(--bg) var(--fade));
+}
+
+.toggle-video-button {
+    width:fit-content; aspect-ratio: 1; margin-inline: auto; text-align: center; border: none; overflow: visible;
+    padding: 1cqw; border-radius: 5cqw; background: var(--orange); color: var(--bg); font-size: 3cqw; 
+    font-family: "caskaydiaCove", monospace; cursor: pointer; margin-top: 7cqw; margin-bottom: 1.25cqw;
+}
+
+.window-content.preview-maximized .toggle-video-button { transform: translateY(-100%) rotate(180deg); padding: 2cqw; margin-top: 2cqw; margin-bottom: 1cqw; }
+.anim :is(.preview-video-container, video, div, .toggle-video-button), .anim .preview-video-container::before { transition: .5s; }

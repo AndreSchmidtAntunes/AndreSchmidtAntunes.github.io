@@ -1,0 +1,70 @@
+
+:root {
+    --bg: #223143;
+    --secondary-bg-colour: #3a6134;
+    --orange: #ca9a88;
+    --light-blue: #88A4CAFF;
+    --border-colour: #181920;
+    --border-width: 0.4cqh;
+}
+
+.window {
+    font-family: 'caskaydiaCove', monospace;
+    
+    background-color: var(--bg);
+    text-align: center;
+}
+
+.window > .window-titlebar {
+    background-color: var(--secondary-bg-colour);
+    border: var(--border-colour) solid var(--border-width);
+    border-bottom: none;
+    color: #BCFF89BA;
+}
+
+.window .control-button > button {
+    --button-padding: 0.75cqh;
+    font-family: 'caskaydiaCove', monospace;
+    border: none;
+    text-align: center;
+    font-size: 75%;
+    
+    color: var(--bg);
+    font-weight: bolder;
+    
+    &.minimize {
+        background-color: #588e58;
+    }
+
+    &.maximise {
+        background-color: #BCFF89BA;
+    }
+
+    &.quit {
+        background-color: rgb(220 98 87);
+    }
+}
+
+.active-window {
+    box-shadow: #0D062775 1cqh 1cqh;
+}
+
+.window-content {
+    scrollbar-color: #88A4CAFF transparent;
+    scrollbar-track-color: transparent;
+}
+
+.window-content::-webkit-scrollbar {
+    width: 14px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background: #555866;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
