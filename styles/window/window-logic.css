@@ -149,7 +149,7 @@ html, body, div, h1, h2, h3, h4, h5, h6, p, a, blockquote, pre, code, hr, img, f
 .window .resizer-bottom {
     z-index: 8;
     width: calc(100% + (2 * var(--resizer-contact-padding)));
-    height: calc(var(--window-padding, 0px) * 3);
+    height: calc(var(--window-padding, 0) * 3);
     background: transparent;
     position: absolute;
     cursor: row-resize;

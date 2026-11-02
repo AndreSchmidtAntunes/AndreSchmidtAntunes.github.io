@@ -5,7 +5,6 @@
 
 :root {
 	--desktop-aspect-ratio: 1.1904761905;
-	--min-desktop-device-width: 640px;
 	color-scheme: dark light;
 }
 
@@ -78,13 +77,13 @@ body {
 				
 				.text-smaller   { font-size: calc(var(--font-mult) * 0.68 + var(--font-base)); }
 				.text-small     { font-size: calc(var(--font-mult) * 0.74 + var(--font-base)); }
-				.text-normal    { font-size: calc(var(--font-mult) + var(--font-base)); }
-				.text-large     { font-size: calc(var(--font-mult) * 1.6 + var(--font-base)); }
-				.text-xl        { font-size: calc(var(--font-mult) * 2.3 + var(--font-base)); }
-				.text-xxl       { font-size: calc(var(--font-mult) * 3 + var(--font-base)); }
-				.text-xxxl      { font-size: calc(var(--font-mult) * 3.6 + var(--font-base)); }
-				.text-xxxxl     { font-size: calc(var(--font-mult) * 4.3 + var(--font-base)); }
-				.text-xxxxxl    { font-size: calc(var(--font-mult) * 5 + var(--font-base)); }
+				.text-normal    { font-size: calc(var(--font-mult)        + var(--font-base)); }
+				.text-large     { font-size: calc(var(--font-mult) * 1.60 + var(--font-base)); }
+				.text-xl        { font-size: calc(var(--font-mult) * 2.30 + var(--font-base)); }
+				.text-xxl       { font-size: calc(var(--font-mult) * 3.00 + var(--font-base)); }
+				.text-xxxl      { font-size: calc(var(--font-mult) * 3.60 + var(--font-base)); }
+				.text-xxxxl     { font-size: calc(var(--font-mult) * 4.30 + var(--font-base)); }
+				.text-xxxxxl    { font-size: calc(var(--font-mult) * 5.00 + var(--font-base)); }
 			}
 		}
 	}
