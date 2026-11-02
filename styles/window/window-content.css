@@ -43,20 +43,25 @@
 .window-content ul {
     list-style: none;
     margin-left: 0;
-    padding-left: 0;
+    padding-left: .5em;
+    align-self: center;
+    text-align: left;
 }
 
 .window-content li {
-    padding-left: 1em;
+    padding-left: 1.5em;
     text-indent: -1em;
+    padding-bottom: .5em;
+    max-width: max(80%, 30em);
 }
 
 .window-content li::before {
     content: '★';
     color: #ca88a4;
     text-shadow: #0f1c2e 0.35cqh 0.35cqh 0;
-    
-    padding-right: 0.5em;
+    text-align: left;
+    margin-left: -.5em;
+    padding-right: .5em;
 }
 
 .window-content p {
