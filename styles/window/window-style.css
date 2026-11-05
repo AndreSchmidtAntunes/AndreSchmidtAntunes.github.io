@@ -5,6 +5,7 @@
     --orange: #ca9a88;
     --light-blue: #88A4CAFF;
     --border-colour: #181920;
+    --grey: #656e80;
     --border-width: 0.4cqh;
 }
 
@@ -40,7 +41,7 @@
         background-color: #BCFF89BA;
     }
 
-    &.quit {
+    &.close {
         background-color: rgb(220 98 87);
     }
 }

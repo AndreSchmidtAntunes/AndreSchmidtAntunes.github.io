@@ -1,7 +1,9 @@
 @import url('fonts.css');
 @import url('window/window-logic.css');
 @import url('window/window-style.css');
+@import url('window/window-content.css');
 @import url('desk-animations.css');
+
 
 :root {
 	--desktop-aspect-ratio: 1.1904761905;
@@ -75,8 +77,7 @@ body {
 					--taskbar-height: calc(6cqh + var(--font-base));
 				}
 				
-				.text-smaller   { font-size: calc(var(--font-mult) * 0.68 + var(--font-base)); }
-				.text-small     { font-size: calc(var(--font-mult) * 0.74 + var(--font-base)); }
+				.text-small     { font-size: calc(var(--font-mult) * 0.8 + var(--font-base)); }
 				.text-normal    { font-size: calc(var(--font-mult)        + var(--font-base)); }
 				.text-large     { font-size: calc(var(--font-mult) * 1.60 + var(--font-base)); }
 				.text-xl        { font-size: calc(var(--font-mult) * 2.30 + var(--font-base)); }

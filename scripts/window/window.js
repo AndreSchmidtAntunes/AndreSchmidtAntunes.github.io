@@ -1,5 +1,7 @@
+import {generateHash, IsPortrait} from "../utils.js";
+
 const desktopScreenE = document.getElementById('screen');
-const windowsContainer = document.getElementById('windows-container');
+export const windowsContainer = document.getElementById('windows-container');
 
 let windowOrderList = [];
 
@@ -11,27 +13,27 @@ const screenResizeObserver = new ResizeObserver((entries) => {
 });
 screenResizeObserver.observe(document.body); // TODO: set to viewport
 
-function spawnWindow(strFileName) {
-    var window = document.createElement('div');
+export function spawnWindow(strFileName) {
+    var windowElement = document.createElement('div');
 
-    window.className = 'window';
-    window.id = generateHash(strFileName).toString();
+    windowElement.className = 'window';
+    windowElement.id = generateHash(strFileName).toString();
 
-    windowsContainer.appendChild(window);
+    windowsContainer.appendChild(windowElement);
 
     const windowBasePath = "resources/html/core/window-base.html"
     const windowsDirectory = windowBasePath + "/../../windows/";
 
     // Load base window div
-    $(window).load(windowBasePath, function () {
-        var windowContent = window.querySelector(".window-content");
+    $(windowElement).load(windowBasePath, function () {
+        var windowContent = windowElement.querySelector(".window-content");
 
         // Load inner content into the base div
         $(windowContent).load(windowsDirectory + strFileName,
             function () { // On Content Finished Loading
 
                 // Set window Title
-                window.querySelector(".window-title").textContent =
+                windowElement.querySelector(".window-title").textContent =
                     windowContent.querySelector('meta[data-name="window-title"]')?.content;
 
                 // Set content box style
@@ -45,45 +47,58 @@ function spawnWindow(strFileName) {
                 if (defaultStateStr) {
                     let defaultState = defaultStateStr.split(" ");
 
-                    window.style.left = defaultState[0] + 'cqw';
-                    window.style.top = defaultState[1] + 'cqh';
-                    window.style.width = "" + (Number(defaultState[2]) - Number(defaultState[0])) + 'cqw';
-                    window.style.height = "" + (Number(defaultState[3]) - Number(defaultState[1])) + 'cqh';
+                    windowElement.style.left = defaultState[0] + 'cqw';
+                    windowElement.style.top = defaultState[1] + 'cqh';
+                    windowElement.style.width = "" + (Number(defaultState[2]) - Number(defaultState[0])) + 'cqw';
+                    windowElement.style.height = "" + (Number(defaultState[3]) - Number(defaultState[1])) + 'cqh';
                 }
 
-                window.classList.add("draggable");
+                windowElement.classList.add("draggable");
 
-                if (window === windowsContainer.firstElementChild) {
-                    putOnTop(window, 0);
+                if (windowElement === windowsContainer.firstElementChild) {
+                    putOnTop(windowElement, 0);
                 }
+                
+                const handlers = {
+                    '.minimize': (button) => 
+                        minimizeWindow(windowElement),
+                    '.maximise': (button) => 
+                        toggleMaximized(button, windowElement),
+                    '.close'   : (button) => 
+                        closeWindow(windowElement),
+                };
 
-                initDragElement(window);
-                initResizeElement(window);
-
+                for (const [selector, handler] of Object.entries(handlers)) {
+                    const button = windowElement.querySelector(selector);
+                    if (button) 
+                        button.addEventListener('pointerdown',()=>handler(button));
+                    else 
+                        console.warn(`button ${selector} is null while loading window: ${windowElement}`);
+                }
+                
                 windowsContainer.dispatchEvent(
                     new CustomEvent("window-spawned", {
-                        detail: window
+                        detail: windowElement
                     })
                 );
-                
-                setActiveWindow(window);
+                initDragElement(windowElement);
+                initResizeElement(windowElement);
+
+                setActiveWindow(windowElement);
             }
         );
     });
 }
 
-function closeWindow(closeBtn) {
-    let window = closeBtn.closest('.window');
-    windowOrderList.splice(windowOrderList.indexOf(window.id.toString()), 1);
-    window.remove(); //TODO: Create window close animation
+function closeWindow(windowElement) {
+    windowOrderList.splice(windowOrderList.indexOf(windowElement.id.toString()), 1);
+    windowElement.remove(); //TODO: Create window close animation
 }
 
 let storedScrollTop = 0;
-function toggleMaximized(btn) {
-    const win = btn.closest('.window');
-    
-    const isMaximized = win.classList.toggle('window-maximized');
-    btn.textContent = isMaximized ? '󰖲' : '󰖯';
+function toggleMaximized(button, windowElement) {
+    const isMaximized = windowElement.classList.toggle('window-maximized');
+    button.textContent = isMaximized ? '󰖲' : '󰖯';
 
     if (IsPortrait()) {
         if (isMaximized) // store the scroll state before maximizing.
@@ -91,7 +106,7 @@ function toggleMaximized(btn) {
         
         windowsContainer.classList.toggle('scroll', !isMaximized);
         windowsContainer.scrollTop = 0;
-        putOnTop(isMaximized ? win : windowsContainer.firstElementChild, 200,
+        putOnTop(isMaximized ? windowElement : windowsContainer.firstElementChild, 200,
         ()=> {
             // set the scroll state every frame of un-maximizing.
             if (!isMaximized)
@@ -99,12 +114,17 @@ function toggleMaximized(btn) {
         });
     }
     else {
-        win.classList.add('animating');
-        win.addEventListener('transitionend', () => {
-            win.classList.remove('animating');
+        windowElement.classList.add('animating');
+        windowElement.addEventListener('transitionend', () => {
+            windowElement.classList.remove('animating');
         }, {once: true});
     }
 }
+
+function minimizeWindow(windowElement) {
+    console.warn("minimize window not implemented");
+}
+
 
 // Source - https://stackoverflow.com/a/77288314
 // Posted by CodeNStuff
@@ -141,7 +161,7 @@ function putOnTop(win, animTime, onTick) {
 }
 
 function setActiveWindow(window) {
-
+    if (!window) return;
     let windowIndex = windowOrderList.indexOf(window.id.toString());
 
     if (window.classList.contains('active-window'))
@@ -157,11 +177,14 @@ function setActiveWindow(window) {
     windowOrderList.push(window.id.toString());
 
     for (let i = 0; i < windowOrderList.length; i++) {
-        document.getElementById(windowOrderList.at(i)).style.zIndex = "" + i;
+        let iWindowElement = document.getElementById(windowOrderList.at(i));
+        if(iWindowElement)
+            iWindowElement.style.zIndex = "" + i;
+        else return;
     }
 
     document.getElementById(windowOrderList.at(-1))
-        .classList.add("active-window");
+        ?.classList.add("active-window");
 }
 
 // TODO: Desktop icons
@@ -169,15 +192,16 @@ function setActiveWindow(window) {
 // TODO: Minimise button
 
 function initDragElement(window) {
+    if (!window) return;
 
     let windowToMouseOffsetX = 0, windowToMouseOffsetY = 0;
     var element = null;
 
     var titlebar = getTitlebarTitle(window);
-
-    window.onpointerdown = function () {
+    
+    window.addEventListener("pointerdown", ()=> {
         setActiveWindow(window);
-    };
+    });
 
     if (titlebar) {
         titlebar.parentWindow = window;
@@ -258,7 +282,8 @@ function getTitlebarTitle(element) {
     return null;
 }
 
-function initResizeElement(windowR) {
+function initResizeElement(windowElement) {
+    if (!windowElement) return;
 
     var element = null;
     var startX, startY, startWidth, startHeight;
@@ -267,26 +292,25 @@ function initResizeElement(windowR) {
     right.className = "resizer-right";
     right.classList.add("draggable");
 
-    windowR.appendChild(right);
+    windowElement.appendChild(right);
     right.addEventListener("pointerdown", initDrag, false);
-    right.parentWindow = windowR;
+    right.parentWindow = windowElement;
 
     var bottom = document.createElement("div");
     bottom.className = "resizer-bottom";
     bottom.classList.add("draggable");
 
-
-    windowR.appendChild(bottom);
+    windowElement.appendChild(bottom);
     bottom.addEventListener("pointerdown", initDrag, false);
-    bottom.parentWindow = windowR;
+    bottom.parentWindow = windowElement;
 
     var both = document.createElement("div");
     both.className = "resizer-both";
-    windowR.appendChild(both);
-    both.classList.add("draggable");
+    windowElement.appendChild(both);
+    both.classList.add("draggable");    
 
     both.addEventListener("pointerdown", initDrag, false);
-    both.parentWindow = windowR;
+    both.parentWindow = windowElement;
 
     function initDrag(e) {
         element = this.parentWindow;
@@ -359,16 +383,3 @@ function updateDesktopClass(e) {
 
 updateDesktopClass(desktopQuery); // set it on load
 desktopQuery.addEventListener('change', updateDesktopClass); // update on resize/rotate
-
-function IsPortrait() {
-    return document.body.classList.contains('mobile');
-}
-
-const generateHash = (string) => {
-    let hash = 0;
-    for (const char of string) {
-        hash = (hash << 5) - hash + char.charCodeAt(0);
-        hash |= 0; // Constrain to 32bit integer
-    }
-    return hash;
-};

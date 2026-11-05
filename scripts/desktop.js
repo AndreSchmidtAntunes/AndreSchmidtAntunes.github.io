@@ -1,4 +1,6 @@
-function initDesktopFeatures() {
+import { IsPortrait } from './utils.js'
+
+export function initDesktopFeatures() {
     initDesktopClock();
 }
 

@@ -1,4 +1,6 @@
 @import url('content/video-project-heading.css');
+@import url('../../scripts/highlightjs-copy/highlightjs-copy.css');
+@import url('../../scripts/highlight/styles/github-dark-dimmed.css');
 
 .window-content {
     font-family: 'caskaydiaCove', monospace;
@@ -15,7 +17,7 @@
     scrollbar-color: var(--bg) var(--border-colour);
 }
 
-.window-content :is(h1, h2, h3, h4, h5, h6, ul, li, span, p, b, li, ul, ol, dl, dt, dd) {
+.window-content :is(h1, h2, h3, h4, h5, h6, ul, li, span, p, b, li, ul, ol, dl, dt, dd, pre, code) {
     user-select: text;
     
     &::selection {
@@ -26,7 +28,7 @@
     
 .window-content :is(h1, h2, h3, h4, h5, h6) {
     text-transform: uppercase;
-    margin-top: 0.5em;
+    margin-top: 1em;
     font-weight: bold;
 }
 
@@ -40,19 +42,46 @@
 .window-content h5 { font-size: 1.25em;  }
 .window-content h6 { font-size: 1em;     }
 
+.window-content p {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+}
+
+.window-content .inline-frame {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+    overflow: unset;
+    image-rendering: auto;
+    max-width: 100%;
+}
+.window-content .inline-frame > :is(img, video),
+.window-content :is(img, video).inline-frame {
+    box-shadow: 0 1cqh 6cqh 0 rgb(0 0 0 / 0.25);
+    max-width: 100%;
+}
+
+.window-content .flex {
+    display: flex !important; 
+}
+
 .window-content ul {
+    align-self: start;
+    text-align: left;
+    padding-inline: 10%;
+    
     list-style: none;
     margin-left: 0;
     padding-left: .5em;
-    align-self: center;
-    text-align: left;
 }
 
 .window-content li {
     padding-left: 1.5em;
     text-indent: -1em;
     padding-bottom: .5em;
-    max-width: max(80%, 30em);
 }
 
 .window-content li::before {
@@ -64,20 +93,29 @@
     padding-right: .5em;
 }
 
-.window-content p {
-    padding: 1em;
-    max-width: max(80%, 30em);
-    align-self: center;
+.window-content :is(p, ul, h3, h4, h5, h6) {
+    align-self: start;
     text-align: left;
+    padding-inline: 10%;
 }
 
-.window-content img {
-    image-rendering: auto;
-    width: 100%;
+.window-content pre:has( > code ) {
+    border-radius: 2% 2% 2% 2%;
+    box-shadow: 0 1cqh 6cqh 0 rgb(0 0 0 / 0.25);
     
-    &.small, &.medium, &.large {
-        box-shadow: 0 1cqh 6cqh 0 rgb(0 0 0 / 0.25);
-    }
+    border:2px solid var(--border-colour);    
+    max-width: 100%;
+    margin-inline: 5%;
+    overflow: hidden;
+}
+
+.window-content pre > code {
+    text-align: start;
+    font-size: .75em !important;
+    white-space: pre;
+    tab-size: 4;
+    
+    scrollbar-width: auto;
 }
 
 .window-content::-webkit-scrollbar {
@@ -124,21 +162,27 @@
     overflow: visible;
 }
 
-.window-content .place-left {
-	position: absolute;
-	left: 0;
-}
-
-.window-content .place-right {
-	position: absolute;
-	right: 0;
-}
-
-.desktop .window-content img {
+.desktop .window-content .inline-frame {
     width: auto;
     height: auto;
-    max-width: 100%;
-    &.small  { max-height: 5em; }
-    &.medium { max-height: 8em; }
-    &.large  { max-height: 14em; }
+    display: inline-block;
+    max-height: var(--frame-h, 8em);
 }
+
+.desktop .window-content .inline-frame:has(img, video) {
+    display: flex;
+    flex-direction: row;
+}
+
+.desktop .window-content .inline-frame > :is(img, video) {
+    flex: 0 1 auto;
+    min-width: 0;
+    width: auto;
+    height: auto;
+    max-height: var(--frame-h, 8em);
+}
+
+.desktop .window-content .inline-frame.small     { --frame-h: 5em; }
+.desktop .window-content .inline-frame.medium    { --frame-h: 8em; }
+.desktop .window-content .inline-frame.large     { --frame-h: 14em; }
+.desktop .window-content .inline-frame.max-width { --frame-h: none; }

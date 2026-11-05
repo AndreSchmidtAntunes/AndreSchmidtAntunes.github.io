@@ -9,27 +9,16 @@
 <!DOCTYPE html>
 <html lang="en" title="Cheese's Desktop">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>test3</title>
-
-    <link rel="stylesheet" href="styles/main.css" fetchpriority="high">
-    <link rel="stylesheet" href="styles/window/window-content.css" fetchpriority="high">
     
-    <script defer type="text/javascript" src="scripts/desk-pc.js" fetchpriority="high"></script>
     <script type="text/javascript" src="scripts/jquery/jquery.js"></script>
-
-    <script defer type="text/javascript" src="scripts/desktop.js" fetchpriority="low"></script>
-    <script defer type="text/javascript" src="scripts/window/window.js" fetchpriority="low"></script>
-    <script defer type="text/javascript" src="scripts/window/window-content.js" fetchpriority="low"></script>
+    
+    <script type="module" src="scripts/main.js"></script>
+    <link rel="stylesheet" href="styles/main.css" fetchpriority="high">
 </head>
 
-<body onload="
-        initDesktopFeatures(); 
-        spawnWindow('spout.html');
-        spawnWindow('welcome.html');
-        spawnWindow('projects.html');
-">
+<body>
 <div id="top-div">
     <div class="body-container">
         <div id="screen-parent">
@@ -59,14 +48,9 @@
             <img src="resources/images/Desk/90s-desk-pc-turning-on-1.webp" alt="" id="img-90s-desk-pc-turning-on-1">
             <img src="resources/images/Desk/90s-desk-pc-turning-on-2.webp" alt="" id="img-90s-desk-pc-turning-on-2">
             <img src="resources/images/Desk/90s-desk-pc-on.webp" alt="" id="img-90s-desk-pc-on">
-            <button id="desk-pc-on-button" title="Power Button" onclick="pcOnButton()"></button>
+            <button id="desk-pc-on-button" title="Power Button"></button>
         </div>
     </div> <!-- body-container -->
 </div> <!-- top-div -->
-
-<script> <!-- Desktop Layout Media Query -->
-
-</script>
-
 </body>
 </html>

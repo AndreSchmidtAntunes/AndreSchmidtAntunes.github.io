@@ -6,17 +6,18 @@
 }
 .window-content.preview-maximized { --stage: var(--v); --gap: 2cqh; }
 
-
-.preview-video-container { position: relative; height: var(--stage); overflow: hidden; z-index: -1; }
+.preview-video-container { position: relative; height: var(--stage); overflow: hidden; z-index: -1;
+    video {
+        display: block; object-fit: cover; width: 100%; height: var(--v);
+        translate: 0 calc((var(--stage) - var(--v)) * .5);
+    }
+}
 .preview-video-container::before {
     content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
     background: linear-gradient(transparent, var(--bg));
 }
 .window-content.preview-maximized .preview-video-container::before { opacity: 0; }
-video {
-    display: block; object-fit: cover; width: 100%; height: var(--v);
-    translate: 0 calc((var(--stage) - var(--v)) * .5);
-}
+
 .text-content {
     position: relative; box-sizing: border-box; display: flex; flex-direction: column; justify-content: end;
     margin-top: var(--gap); min-height: var(--fade); overflow: visible;
