@@ -69,3 +69,35 @@
     font-style: italic;
     src: url(../resources/fonts/CaskaydiaCove/CaskaydiaCoveNerdFont-ExtraLightItalic.ttf)
 }
+
+/* Fira Code */
+
+@font-face {
+    font-family: firaCode;
+    font-weight: bold;
+    src: url(../resources/fonts/FiraCode/FiraCode-Bold.ttf)
+}
+
+@font-face {
+    font-family: firaCode;
+    font-weight: 600;
+    src: url(../resources/fonts/FiraCode/FiraCode-SemiBold.ttf)
+}
+
+@font-face {
+    font-family: firaCode;
+    font-weight: 500;
+    src: url(../resources/fonts/FiraCode/FiraCode-Medium.ttf)
+}
+
+@font-face {
+    font-family: firaCode;
+    font-weight: normal;
+    src: url(../resources/fonts/FiraCode/FiraCode-Regular.ttf)
+}
+
+@font-face {
+    font-family: firaCode;
+    font-weight: 300;
+    src: url(../resources/fonts/FiraCode/FiraCode-Light.ttf)
+}

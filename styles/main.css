@@ -4,7 +4,6 @@
 @import url('window/window-content.css');
 @import url('desk-animations.css');
 
-
 :root {
 	--desktop-aspect-ratio: 1.1904761905;
 	color-scheme: dark light;

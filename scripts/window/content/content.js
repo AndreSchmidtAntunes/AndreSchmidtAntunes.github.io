@@ -1,4 +1,4 @@
-import { initCodeHighlighting } from "./code-highlighting.js";
+import { initCodeHighlighting } from "./code/code-highlighting.js";
 
 export function initContent(windowsContainer) {
     initCodeHighlighting(windowsContainer);

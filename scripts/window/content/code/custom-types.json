@@ -1,0 +1,5 @@
+{
+  "*": [""],
+  "csharp": ["Vector4", "Vector3", "Vector2", "GameObject", "Transform", "Quaternion", "FacingMode", "DialogueType", "Random", "Mathf", "List"],
+  "cpp": ["TVector", "Matrix4", "EntityId"]
+}

@@ -4,7 +4,7 @@
   transform: translateZ(0);
 }
 .hljs-copy-container {
-  --hljs-theme-padding: 16px;
+  --hljs-theme-padding: 1em ;
   position: absolute;
   top: 0;
   right: 0;
@@ -13,12 +13,12 @@
 .hljs-copy-button {
   position: relative;
   margin: calc(var(--hljs-theme-padding) / 2);
-  width: calc(16px + var(--hljs-theme-padding));
-  height: calc(16px + var(--hljs-theme-padding));
+  width: calc(1em + var(--hljs-theme-padding));
+  height: calc(1em + var(--hljs-theme-padding));
   font-size: 0.8125em;
   text-indent: -9999px; /* Hide the inner text */
   color: var(--hljs-theme-color);
-  border-radius: .5em;
+  border-radius: 20%;
   border: 2px solid;
   border-color: color-mix(in srgb, var(--hljs-theme-color), transparent 80%);
   background-color: var(--hljs-theme-background);
@@ -27,8 +27,8 @@
 }
 .hljs-copy-button:not([data-copied="true"])::before {
   content: "";
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -51,12 +51,12 @@
   border-color: color-mix(in srgb, var(--hljs-theme-color), transparent 60%);
 }
 .hljs-copy-button[data-copied="true"] {
-  text-indent: 0px; /* Shows the inner text */
+  text-indent: 0; /* Shows the inner text */
   width: auto;
 }
 
 .hljs-copy-container[data-autohide="true"] {
-  transform: translateX(calc(100% + 1.125em));
+  transform: translateX(calc(100% + 1.5em));
 }
 
 .hljs-copy-wrapper:focus-within .hljs-copy-container {

@@ -1,6 +1,6 @@
 @import url('content/video-project-heading.css');
-@import url('../../scripts/highlightjs-copy/highlightjs-copy.css');
-@import url('../../scripts/highlight/styles/github-dark-dimmed.css');
+@import url('../../scripts/highlight/plugins/highlightjs-copy/highlightjs-copy.css');
+@import url('content/code.css');
 
 .window-content {
     font-family: 'caskaydiaCove', monospace;
@@ -97,25 +97,6 @@
     align-self: start;
     text-align: left;
     padding-inline: 10%;
-}
-
-.window-content pre:has( > code ) {
-    border-radius: 2% 2% 2% 2%;
-    box-shadow: 0 1cqh 6cqh 0 rgb(0 0 0 / 0.25);
-    
-    border:2px solid var(--border-colour);    
-    max-width: 100%;
-    margin-inline: 5%;
-    overflow: hidden;
-}
-
-.window-content pre > code {
-    text-align: start;
-    font-size: .75em !important;
-    white-space: pre;
-    tab-size: 4;
-    
-    scrollbar-width: auto;
 }
 
 .window-content::-webkit-scrollbar {

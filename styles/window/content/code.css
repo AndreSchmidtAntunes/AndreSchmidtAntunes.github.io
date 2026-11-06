@@ -1,0 +1,132 @@
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	color: #abb2bf;
+	background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+	color: #5c6370;
+	font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-built_in,
+.hljs-formula {
+	color: #c678dd;
+}
+
+.hljs-variable,
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+	color: #e06c75;
+}
+
+.hljs-literal {
+	color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+	color: #98c379;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+	color: #e6c07b;
+}
+
+.hljs-variable.constant_,
+.hljs-attr,
+.hljs-template-variable,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+	color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+	color: #61aeee;
+}
+
+.hljs-variable.local_ {
+	color: #abb2bf;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+
+.hljs-link {
+	text-decoration: underline;
+}
+
+pre:has(code.hljs) {
+	border-radius: 2% 2% 2% 2%;
+	box-shadow: 0 1cqh 6cqh 0 rgb(0 0 0 / 0.25);
+	
+	border:2px solid var(--border-colour);
+	max-width: 100%;
+	margin-inline: 5%;
+	overflow: hidden;
+}
+
+pre code.hljs {
+	text-align: start;
+	font-size: .75em !important;
+	line-height: 1.5em;
+	scrollbar-width: auto;
+	white-space: pre;
+	tab-size: 4;
+	
+	font-family: 'firaCode', "JetBrains Mono", monospace;
+	font-variant-ligatures: common-ligatures;
+}
+
+pre code.hljs.numbered {
+	counter-reset: line;
+	display: block;
+	padding-left: 0;
+}
+
+pre code.hljs.numbered .line {
+	display: block;
+	position: relative;
+	padding-left: 2.5em;   /* space for the gutter */
+}
+
+pre code.hljs.numbered .line::before {
+	counter-increment: line;
+	content: counter(line);
+	position: absolute;
+	
+	font-size: .8em;
+	text-align: right;
+	margin-top: .15em; /* a bit of an offset down to center the numbers a bit more */
+	
+	font-weight: lighter;
+	left: 0;
+	width: 2em;
+	opacity: 0.3;
+	
+	user-select: none;
+}

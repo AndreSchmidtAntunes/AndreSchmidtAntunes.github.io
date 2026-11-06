@@ -8,17 +8,22 @@
 <!----(((---(((---------------------->
 <!DOCTYPE html>
 <html lang="en" title="Cheese's Desktop">
-<head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>test3</title>
+<head> <title>test3</title> <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css" fetchpriority="high">
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "hljs/": "/public/scripts/highlight/es/"
+            }
+        }
+    </script>
     
     <script type="text/javascript" src="scripts/jquery/jquery.js"></script>
-    
     <script type="module" src="scripts/main.js"></script>
-    <link rel="stylesheet" href="styles/main.css" fetchpriority="high">
 </head>
 
-<body>
+<body>  
 <div id="top-div">
     <div class="body-container">
         <div id="screen-parent">
