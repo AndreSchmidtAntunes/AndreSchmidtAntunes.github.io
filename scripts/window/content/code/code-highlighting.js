@@ -1,19 +1,21 @@
-import hljs from '/public/scripts/highlight/es/highlight.min.js';
+import hljs from '../../../highlight/es/highlight.min.js';
 
-import csharp from '/public/scripts/highlight/es/languages/csharp.min.js';
-import cpp from '/public/scripts/highlight/es/languages/cpp.min.js';
+import csharp from '../../../highlight/es/languages/csharp.min.js';
+import cpp from '../../../highlight/es/languages/cpp.min.js';
+
+import { CopyButtonPlugin } from '../../../highlight/plugins/highlightjs-copy/highlightjs-copy.esm.js';
+import { loadTypes, highlightCustomTypes } from './highlight-custom-types.js';
+import customTypes from './custom-types.json' with { type: 'json' };
+
 hljs.registerLanguage('csharp', csharp);
 hljs.registerLanguage('cpp', cpp);
 
-import { CopyButtonPlugin } from '/public/scripts/highlight/plugins/highlightjs-copy/highlightjs-copy.esm.js';
 hljs.addPlugin(
     new CopyButtonPlugin({ 
         autohide: true 
     })
 );
 
-import { loadTypes, highlightCustomTypes } from './highlight-custom-types.js';
-import customTypes from './custom-types.json' with { type: 'json' };
 if (customTypes) {
     hljs.addPlugin({
         'after:highlightElement': ({ el, result }) => {
