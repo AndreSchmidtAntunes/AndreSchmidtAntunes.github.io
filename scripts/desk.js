@@ -19,7 +19,6 @@ function pcGetStoredState() {
 }
 
 export function initDeskLayers() {
-    onpointerdown = togglePcOn;
         document.getElementById('desk-pc-on-button').addEventListener('pointerdown', togglePcOn); 
     pcGetStoredState();
     pcClearLayerStates();
