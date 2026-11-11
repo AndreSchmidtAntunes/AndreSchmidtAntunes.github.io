@@ -40,10 +40,8 @@
     </p>
 <pre><code class="language-csharp" data-constants="CameraPosition, CameraForward">void UpdateBillboardState() {
     if (!m_camera || !m_billboardVisual) return;
-
-    Vector3 camera_pos = m_camera.transform.position;
-    Vector3 look_target = camera_pos;
-
+    
+    Vector3 look_target = m_camera.transform.position;
     Vector3 dir_to_cam = (m_camera.transform.position - transform.position).normalized;
 
     m_billboardVisual.position = dir_to_cam * z_offset + transform.position +
